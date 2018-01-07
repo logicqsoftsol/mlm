@@ -1,0 +1,184 @@
+<div> 
+<article id="defaultload">
+<div class=jumbotron> 
+ <div class=container>
+  <div class="panel panel-info">
+            <div class="panel-heading">
+             <h4 class="modal-title pull-center">Your Payment Details</h4>
+              <h3 class="panel-title  pull-right">{{userprofile.firstname}} {{userprofile.lastname}}</h3>
+			 <h3 class="panel-title  pull-left">Amount : INR 400.00</h3>
+            </div>
+            <div class="panel-body">
+               <!-- Modal Profile Create -->
+        <div class="tab-container">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 bhoechie-tab-menu">
+              <div class="list-group">
+                <a href="#" class="list-group-item active text-center">
+                  <h4><i class="fa fa-money" aria-hidden="true"></i></h4><br/>Cash Payemnt
+                </a>
+                <a href="#" class="list-group-item text-center">
+                  <h4><i class="fa fa-credit-card" aria-hidden="true"></i></h4><br/>Credit Card
+                </a>
+				<a href="#" class="list-group-item text-center">
+                  <h4><i class="fa fa-desktop" aria-hidden="true"></i></h4><br/>Net Banking
+                </a>
+                <a href="#" class="list-group-item text-center">
+                  <h4><i class="fa fa-credit-card" aria-hidden="true"></i></h4><br/>Debit Card
+                </a>
+              </div>
+            </div>
+			<ng-form name="payment" class="form-horizontal" role="form">
+      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab">
+              
+			  <!-- flight section -->
+                <div class="bhoechie-tab-content active">
+                <div class="col-md-12">
+					<div class="col-md-4">
+							<div class="form-group">
+          <label class="col-md-4 control-label">Mode of  Payment *</label>
+          <div class="col-md-8">
+            <select  class="form-control"  name="modeofpayment" ng-model="paymentdetails.modeofpayment" required>
+			<option value="Cash" selected="selected">Cash</option>
+			<option value="Cheque">Cheque</option>
+         </select>
+         <span style="color:red" ng-show="payment.modeofpayment.$error.required">Please enter  Refence number</span>
+          </div>
+	         </div>
+	         </div>
+			</div>
+			<div class="col-md-12">
+					<div class="col-md-6">
+					<div class="form-group">
+						<label for="paymentdetails.refrenceno">Refrence Number/Cheque No *</label>
+						<input id="refrenceno" name="refrenceno" ng-model="paymentdetails.refrenceno" placeholder="Enter your Refrence Number/Cheque No" class="form-control" type="text" required>
+						<span style="color:red" ng-show="payment.refrenceno.$error.required">Please enter  Refence number</span>
+					</div>	 
+					</div>  
+				</div>
+			</div>
+                <div class="bhoechie-tab-content">
+                   <div class="col-md-12">
+<div class="panel panel-default">
+       <div class="panel-heading" >
+                    <div class="row display-tr" >
+                        <h3 class="panel-title display-td" >Payment Details</h3>
+                        <div class="display-td" >                            
+                            <img class="img-responsive pull-right" src="assets/images/accepted_c22e0.png">
+                        </div>
+                    </div>                    
+                </div>
+   <div class="panel-body">
+                      
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label for="cardNumber">CARD NUMBER</label>
+                                    <div class="input-group">
+                                        <input 
+                                            type="tel"
+                                            class="form-control"
+                                            name="cardNumber"
+                                            placeholder="Card Number"
+                                            autocomplete="cc-number"
+                                            required autofocus />
+                                        <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                                    </div>
+                                </div>                            
+                            </div>
+                            <div class="col-xs-4 col-md-4 pull-right">
+                                <div class="form-group">
+                                    <label for="cardCVC">CV CODE</label>
+                                    <input 
+                                        type="tel" 
+                                        class="form-control"
+                                        name="cardCVC"
+                                        placeholder="CVC"
+                                        autocomplete="cc-csc"
+                                        required
+                                    />
+                                </div>
+                            </div>
+								<div class="col-xs-6 col-md-6">
+                                <div class="form-group">
+                                    <label for="cardNumber">Card Holder Name</label>
+                                    <div class="input-group">
+                                        <input 
+                                            type="text"
+                                            class="form-control"
+                                            name="cardholdername"
+                                            placeholder=" Card Holder Name"
+                                            required />
+                                    </div>
+                                </div>                            
+                            </div>
+                            <div class="col-xs-4 col-md-4">
+                                <div class="form-group">
+                                    <label for="cardExpiry"><span class="hidden-xs">EXPIRATION</span><span class="visible-xs-inline">EXP</span> DATE</label>
+                                    <input 
+                                        type="tel" 
+                                        class="form-control" 
+                                        name="cardExpiry"
+                                        placeholder="MM / YY"
+                                        autocomplete="cc-exp"
+                                        required 
+                                    />
+                                </div>
+                            </div>
+                </div>
+            </div>            
+ 
+				</div>  
+                </div>
+                
+                  <!-- bank  section -->
+                <div class="bhoechie-tab-content">
+		
+				</div>
+    
+                <!-- bank  section -->
+           <div class="bhoechie-tab-content">
+	
+    </div>
+				
+            </div>
+			 </ng-form>
+						<button type="submit" id="paymentdetails" class="btn btn-default btn-space pull-right" ng-click="editUserDetails()" ng-disabled="paymentdetails.$invalid"
+								data-dismiss="modal"><i class="fa fa-check-circle" aria-hidden="true"></i>proceed Payment</button>
+							<button type="button" class="btn btn-default btn-space pull-right" ng-click="cancalePayment()"
+								data-dismiss="modal"><i class="fa fa-times-circle" aria-hidden="true"></i>Cancle</button>
+        </div>	
+	
+			</div>          
+            </div>
+         
+
+</div>
+</div>
+	
+	<script>
+$(document).ready(function() {
+    $("div.bhoechie-tab-menu>div.list-group>a").click(function(e) {
+        e.preventDefault();
+        $(this).siblings('a.active').removeClass("active");
+        $(this).addClass("active");
+        var index = $(this).index();
+        $("div.bhoechie-tab>div.bhoechie-tab-content").removeClass("active");
+        $("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
+    });
+});
+
+$(document).on('click', '.panel-heading span.clickable', function(e){
+    var $this = $(this);
+	if(!$this.hasClass('panel-collapsed')) {
+		$this.parents('.panel').find('.panel-body').slideUp();
+		$this.addClass('panel-collapsed');
+		$this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+	} else {
+		$this.parents('.panel').find('.panel-body').slideDown();
+		$this.removeClass('panel-collapsed');
+		$this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+	}
+})
+</script>
+		</div><!---End of Modal Export details--> 
+ </article>
+ </div>

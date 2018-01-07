@@ -1,0 +1,293 @@
+<div> 
+<article id="defaultload" ng-init="displayProfile()">
+<snap-drawer>
+ <div class="snap-menu"> <div class="sidebar-header text-center"> 
+  <h4>{{profileDisplayName.firstname}} {{profileDisplayName.lastname}}</h4>
+ <img ng-src="{{user.image}}" class="sidebar-img img-circle"> 
+ </div> 
+ <ul class="snap-ul">  
+ <li ng-class="{active: $state.includes('overview')}"><a ui-sref=overview>Home</a></li> 
+ <li ng-class="{active: $state.includes('perfreports')}" > <a ui-sref=perfreports>Reports </a></li> 
+ <li ng-class="{active: $state.includes('meeting_task')}" > <a ui-sref=meeting_task>Meeting & Task</a></li> 
+ <li ng-class="{active: $state.includes('rewards')}" > <a ui-sref=rewards>Rewards </a></li>
+ <li ng-class="{active: $state.includes('passwordreset')}" > <a ui-sref=passwordreset>Reset Password</a></li> 
+ <li ng-class="{active: $state.includes('logout')}" > <a ui-sref=logout>Logout </a></li> 
+ </ul> 
+ </div> 
+ </snap-drawer> 
+ <snap-dragger>
+ </snap-dragger> 
+	 <snap-content snap-opt-tap-to-close="false" class=bg-dark>
+ <a snap-toggle=left ng-click="menuOpen = !menuOpen"> 
+ <span class="menutoggle"> 
+ <i ng-hide="menuOpen" class="fa fa-bars fa-2x"></i> <i ng-show="menuOpen" class="fa fa-times fa-2x"></i> 
+ </span> 
+ </a> 
+ <div class=fr>
+ <h2> View Your Reports<small> Easy Way to setup your things</small></h2> 
+ </div>
+<div class=jumbotron> 
+ <div class=container>
+
+<div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">Reports For Networks</h3>
+			  <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+            </div>
+            <div class="panel-body">
+                  <div class="col-md-3 col-lg-3" align="center"> <img alt="User Pic" ng-src="{{user.image}}" class="img-circle img-responsive"> </div>
+                
+                <div class="col-md-9 col-lg-9 table-responsive"> 
+                  <table class="table table-user-information">
+				  <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date Of Join</th>
+                    <th>Refrence By</th>
+                </tr>
+				 </thead>
+                    <tbody>
+                  <tr>
+                    <td>Sudhanshu Lenka</td>
+                    <td>10-02-2016</td>
+                    <td>Sangaram</td>
+                </tr>
+			  <tr>
+                    <td>Sunil Patro</td>
+                    <td>10-04-2016</td>
+                    <td>Sudhanshu</td>
+                </tr>
+			  <tr>
+                    <td>Guru Patro</td>
+                    <td>10-06-2016</td>
+                    <td>Sunil</td>
+                </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+</div>
+<div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">Reports For Wallet</h3>
+			  <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+            </div>
+            <div class="panel-body">
+                  <div class="col-md-3 col-lg-3" align="center"> <img alt="User Pic" ng-src="{{user.image}}" class="img-circle img-responsive"> </div>
+                
+                <div class="col-md-9 col-lg-9 table-responsive"> 
+                  <table class="table table-user-information">
+				  <thead>
+                <tr>
+                    <th>Amount</th>
+                    <th>Date Of Join</th>
+                    <th>Enashed</th>
+					<th>Earned</th>
+                </tr>
+				 </thead>
+                    <tbody>
+                  <tr>
+                    <td>Sudhanshu Lenka</td>
+                    <td>10-02-2016</td>
+                    <td>4500.00</td>
+					<td>20000.00</td>
+                </tr>
+			  <tr>
+                    <td>Sunil Patro</td>
+                    <td>10-04-2016</td>
+                     <td>4500.00</td>
+					<td>20000.00</td>
+                </tr>
+			  <tr>
+                    <td>Guru Patro</td>
+                    <td>10-06-2016</td>
+                    <td>4500.00</td>
+					<td>20000.00</td>
+                </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+          </div>
+		  
+<div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">Reports For Tasks</h3>
+			  <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+            </div>
+            <div class="panel-body">
+                 <div class="col-md-3 col-lg-3" align="center"> <img alt="User Pic" ng-src="{{user.image}}" class="img-circle img-responsive"> </div>
+                
+                <div class="col-md-9 col-lg-9 table-responsive"> 
+                  <table class="table table-user-information">
+				  <thead>
+                <tr>
+                    <th>Task For</th>
+					<th>Task Start Date</th>
+                    <th>Task End Date</th>
+                    <th>Task Status</th>
+					<th>Task Agenda</th>
+					<th>Task Reasone</th>
+                </tr>
+				 </thead>
+                    <tbody>
+                  <tr>
+                    <td>Level-1</td>
+                    <td>10-02-2016</td>
+                    <td>10-02-2016</td>
+					<td>Sucess</td>
+					<td>First Step to Network</td>
+					<td>N/A</td>
+                </tr>
+			  <tr>
+                   <td>Level-2</td>
+                    <td>10-02-2016</td>
+                    <td>10-02-2016</td>
+					<td>Fail</td>
+					<td>Under standing MLM</td>
+					<td>Due to Leav unable to attend</td>
+                </tr>
+			  <tr>
+                     <td>Level-2</td>
+                    <td>10-02-2016</td>
+                    <td>10-02-2016</td>
+					<td>Sucess</td>
+					<td>Grow Your Network</td>
+					<td>N/A</td>
+                </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+          </div>	
+
+<div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">Reports For Mettings</h3>
+			  <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+            </div>
+            <div class="panel-body">
+                  <div class="col-md-3 col-lg-3" align="center"> <img alt="User Pic" ng-src="{{user.image}}" class="img-circle img-responsive"> </div>
+                
+                <div class="col-md-9 col-lg-9 table-responsive"> 
+                  <table class="table table-user-information">
+				  <thead>
+                <tr>
+                    <th>Meeting For</th>
+					<th>Metting Start Date</th>
+                    <th>Metting End Date</th>
+                    <th>Metting Status</th>
+					<th>Metting Agenda</th>
+					<th>Metting Reasone</th>
+                </tr>
+				 </thead>
+                    <tbody>
+                  <tr>
+                    <td>Gold Memeber</td>
+                    <td>10-02-2016</td>
+                    <td>10-02-2016</td>
+					<td>Fail</td>
+					<td>How to Increase member</td>
+					<th>Flight Dealy</th>
+                </tr>
+			  <tr>
+                   <td>Level-2</td>
+                    <td>10-02-2016</td>
+                    <td>10-02-2016</td>
+					<td>Fail</td>
+					<td>Under standing MLM</td>
+					<th>All memeber un-avialble</th>
+                </tr>
+			  <tr>
+                     <td>Level-2</td>
+                    <td>10-02-2016</td>
+                    <td>10-02-2016</td>
+					<td>Sucess</td>
+					<td>Grow Your Network</td>
+					<td>N/A</td>
+                </tr>
+                    </tbody>
+                  </table>
+                </div>
+        </div>
+ </div>		
+
+</div>
+</div>
+
+<!-- meeting modal-->
+	<div id="setupmeeting"  name="setupmeeting" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog">
+ <div class="modal-dialog">
+	<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title">Setup Mettings</h4>	
+						</div>
+	<div class="modal-body">
+	<div class="col-md-6">
+        <div class="form-group">
+				 <input type="text" class="form-control" placeholder="Meeting  For" list="grouplist">
+<datalist id="grouplist">
+  <option value="Level-1">
+  <option value="Level-2">
+  <option value="Level-3">
+  <option value="Level-4">
+  <option value="Level-5">
+  <option value="Level-6">
+  <option value="Level-7">
+  <option value="Level-8">
+  <option value="Level-9">
+  <option value="Level-10">
+  <option value="All">
+</datalist>
+				</div>
+				<div class="form-group">
+				 <input type="datetime-local" class="form-control" placeholder="Meeting  Start Date">
+				</div>
+				<div class="form-group">
+				 <input type="datetime-local" class="form-control" placeholder="Meeting  End Date">
+				</div>
+				<div class="form-group">
+				 <textarea  class="form-control" placeholder="Meeting  Agenda"></textarea>
+				</div>
+				</div>
+		</div>
+				<div class="modal-footer">
+							<button type="submit" id="usersearch" class="btn btn-default" ng-click="downloadAttendaceReport()"
+								data-dismiss="modal"><i class="fa fa-check-circle" aria-hidden="true"></i>Confirm</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal"><i class="fa fa-times-circle" aria-hidden="true"></i>Close</button>
+			   </div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<script>
+$(document).ready(function() {
+    $("div.bhoechie-tab-menu>div.list-group>a").click(function(e) {
+        e.preventDefault();
+        $(this).siblings('a.active').removeClass("active");
+        $(this).addClass("active");
+        var index = $(this).index();
+        $("div.bhoechie-tab>div.bhoechie-tab-content").removeClass("active");
+        $("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
+    });
+});
+
+$(document).on('click', '.panel-heading span.clickable', function(e){
+    var $this = $(this);
+	if(!$this.hasClass('panel-collapsed')) {
+		$this.parents('.panel').find('.panel-body').slideUp();
+		$this.addClass('panel-collapsed');
+		$this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+	} else {
+		$this.parents('.panel').find('.panel-body').slideDown();
+		$this.removeClass('panel-collapsed');
+		$this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+	}
+})
+</script>
+		</div><!---End of Modal Export details--> 
+ </article>
+ </div>

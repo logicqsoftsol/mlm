@@ -1,0 +1,71 @@
+<div> 
+<article id="defaultload" ng-init="displayProfile()">
+<snap-drawer>
+ <div class="snap-menu"> <div class="sidebar-header text-center"> 
+  <h4>{{profileDisplayName.firstname}} {{profileDisplayName.lastname}}</h4>
+ <img ng-src="{{user.image}}" class="sidebar-img img-circle"> 
+ </div> 
+ <ul class="snap-ul">  
+ <li ng-class="{active: $state.includes('overview')}"><a ui-sref=overview>Home</a></li> 
+ <li ng-class="{active: $state.includes('perfreports')}" > <a ui-sref=perfreports>Reports </a></li> 
+ <li ng-class="{active: $state.includes('meeting_task')}" > <a ui-sref=meeting_task>Meeting & Task</a></li> 
+ <li ng-class="{active: $state.includes('rewards')}" > <a ui-sref=rewards>Rewards </a></li> 
+  <li ng-class="{active: $state.includes('passwordreset')}" > <a ui-sref=passwordreset>Reset Password</a></li>
+ <li ng-class="{active: $state.includes('logout')}" > <a ui-sref=logout>Logout </a></li> 
+ </ul> 
+ </div> 
+ </snap-drawer> 
+ <snap-dragger>
+ </snap-dragger> 
+	 <snap-content snap-opt-tap-to-close="false" class=bg-dark>
+ <a snap-toggle=left ng-click="menuOpen = !menuOpen"> 
+ <span class="menutoggle"> 
+ <i ng-hide="menuOpen" class="fa fa-bars fa-2x"></i> <i ng-show="menuOpen" class="fa fa-times fa-2x"></i> 
+ </span> 
+ </a> 
+ <div class=fr>
+ <h2> Rewards<small> See Your Rewards Chart</small></h2> 
+ </div>
+ 
+	<!-- meeting -->
+	<div id="setupmeeting"  name="setupmeeting" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog">
+ 		<h4 class="modal-title">Rewards Chart</h4>	
+	<div class="col-md-6">
+        
+	</div>
+	<button type="submit" id="usersearch" class="btn btn-default" ng-click="downloadAttendaceReport()" data-dismiss="modal">
+	<i class="fa fa-check-circle" aria-hidden="true"></i>Confirm
+	</button>
+	<button type="button" class="btn btn-default" data-dismiss="modal">
+	<i class="fa fa-times-circle" aria-hidden="true"></i>Close
+	</button>
+		
+	</div>
+	<script>
+$(document).ready(function() {
+    $("div.bhoechie-tab-menu>div.list-group>a").click(function(e) {
+        e.preventDefault();
+        $(this).siblings('a.active').removeClass("active");
+        $(this).addClass("active");
+        var index = $(this).index();
+        $("div.bhoechie-tab>div.bhoechie-tab-content").removeClass("active");
+        $("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
+    });
+});
+
+$(document).on('click', '.panel-heading span.clickable', function(e){
+    var $this = $(this);
+	if(!$this.hasClass('panel-collapsed')) {
+		$this.parents('.panel').find('.panel-body').slideUp();
+		$this.addClass('panel-collapsed');
+		$this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+	} else {
+		$this.parents('.panel').find('.panel-body').slideDown();
+		$this.removeClass('panel-collapsed');
+		$this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+	}
+})
+</script>
+		</div><!---End of Modal Export details--> 
+ </article>
+ </div>

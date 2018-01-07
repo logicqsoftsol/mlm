@@ -1,0 +1,83 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:component-scan base-package="com.logicq.mlm">
+ 
+	</context:component-scan>
+	<mvc:annotation-driven />
+
+	<!-- Getting Database properties -->
+	<context:property-placeholder location="classpath:application.properties" />
+
+	
+<!-- Specifying the Resource location to load JS, CSS, Images etc -->
+	<mvc:resources mapping="/static/**" location="/WEB-INF/static/" />
+
+	<mvc:default-servlet-handler/>
+	<context:annotation-config />
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<bean id="ds"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<!--property name="url" value="jdbc:mysql://45.113.136.130:3306/logicqso_mlm" />
+		<property name="username" value="getpay" />
+		<property name="password" value="uvusedu2e" /--> 
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/getpay"/>
+		<property name="username" value="root" />
+		<property name="password" value="" />
+	</bean>
+
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="ds" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				
+				<!-- Use this property if you want hibernate to create tables. 
+					 Just create the DB configured in datasource. With this 
+					 property enabled, hibernate will generate DDLs & create
+					 the required tables in DB. 		
+				-->
+				<!-- <prop key="hibernate.hbm2ddl.auto">create</prop> -->
+			</props>
+		</property>
+		<property name="packagesToScan" value="com.logicq.mlm.model"></property>
+	</bean>
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<!-- setting maximum upload size -->
+		<property name="maxUploadSize" value="1000000" />
+	</bean>
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="getpayindia@gmail.com"/>
+		<property name="password" value="gpindia*123"/>
+		<!--<property name="username" value="sudhanshu.lenka2008@gmail.com"/>
+		<property name="password" value="babu@0701402098"/>-->
+ 
+		<!-- The name of the property, following JavaBean naming conventions -->
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+</beans>

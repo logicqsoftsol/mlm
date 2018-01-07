@@ -1,0 +1,569 @@
+<div> 
+<article id="defaultload" ng-init="displayProfile()">
+<snap-drawer>
+ <div class=snap-menu> <div class="sidebar-header text-center"> 
+  <h4>{{userprofile.firstname}} {{userprofile.lastname}}</h4>
+ <img ng-src="{{user.image}}" class="sidebar-img img-circle"> 
+ </div> 
+ <ul class=snap-ul>  
+ <li ng-class="{active: $state.includes('overview')}"><a ui-sref=overview>Home</a></li> 
+ <li ng-class="{active: $state.includes('reports')}" > <a ui-sref=reports>Reports </a></li> 
+ <li ng-class="{active: $state.includes('logout')}" > <a ui-sref=reports>Logout </a></li> 
+ </ul> 
+ </div> 
+ </snap-drawer> 
+ <snap-dragger>
+ </snap-dragger> 
+	 <snap-content snap-opt-tap-to-close=false class=bg-dark>
+ <a snap-toggle=left ng-click="menuOpen = !menuOpen"> 
+ <span class=menutoggle> 
+ <i ng-hide=menuOpen class="fa fa-bars fa-2x"></i> <i ng-show=menuOpen class="fa fa-times fa-2x"></i> 
+ </span> 
+ </a> 
+ <div class=fr>
+ <h2>Organization Details <small>MLM Admin Details</small></h2> 
+ </div>
+ <div class=jumbotron> 
+   <a href="" data-target="#profiledetails" data-toggle="modal" class="btn btn-sucess pull-right" ng-click="setupNetwork()">
+    <i class="fa fa-users" aria-hidden="true"></i>
+	<span>Add New Member</span>
+</a>
+<a href="" data-target="#setupmeeting" data-toggle="modal" class="btn btn-sucess pull-right">
+    <i class="fa fa-calendar" aria-hidden="true"></i>
+	<span>Schedule Meeting</span>
+</a>
+ <a href="" data-target="#setuptask" data-toggle="modal" class="btn btn-sucess pull-right">
+    <i class="fa fa-tasks" aria-hidden="true"></i>
+	<span>Schedule Task</span>
+</a>
+</div>
+ <div class=jumbotron> 
+ <div class=container>
+  <div class="col-md-6 span6">   
+
+  <div class="col-md-12">
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">Admin Task Details</h3>
+			  <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+            </div>
+            <div class="panel-body">
+                  <ul class="nav nav-tabs">
+				       <li class="tab"><a data-toggle="tab" id="networkfeetab" class="pull-center"  ng-click="getEnashedRequestDetails(1)"
+								href="/mlmlogicq/#/dashboard/adminoverview#networkfeetab">Network Fee</a></li>
+							<li><a data-toggle="active" id="approvaltaskdetails" class="pull-center"  ng-click="getPendingTaskDetails(1)"
+							href="/mlmlogicq/#/dashboard/adminoverview#approvaltaskdetails">Pending Task Dteails</a></li>
+							<li class="tab"><a data-toggle="tab" id="encasedRequest" class="pull-center"  ng-click="getEnashedRequestDetails(1)"
+								href="/mlmlogicq/#/dashboard/adminoverview#encasedRequest">Encashed Request</a></li>
+						</ul>
+						<div class="tab-content">
+						<div id="networkfeetab" class="tab-pane fade">
+					    <br></br>
+						<div class="table-responsive">
+						  <table class="table table-bordered table-fixed table-hover">
+							<tr class ="success">
+								<th class="pull-center">Network Level</th>
+								<th class="pull-center">Amount</th>
+								<th class="pull-center">Member</th>
+							</tr>
+							<tr ng-repeat="networkfee in networkfeelist">
+								<td>{{networkfee.networklevel}}</td>
+								<td>{{networkfee.amount}}</td>
+								<td>{{networkfee.member}}</td>
+								<td><a id="updatenetworkfee"  data-toggle="modal"  data-target="#updatenetworkfeemodal"   ng-click="editExistingNetworkFee(networkfee)"><i class="fa fa-pencil-square" aria-hidden="true"></i></a></td>
+							</tr>
+						</table>
+						</div>
+						</div>
+						
+						
+						<div id="approvaltaskdetails" class="tab-pane fade in active">
+					    <br></br>
+						<div class="table-responsive">
+						  <table class="table table-bordered table-fixed table-hover">
+							<tr class ="success">
+								<th class="pull-center">Task Name</th>
+								<th class="pull-center">Task For</th>
+								<th class="pull-center">Task Assigned Date</th>
+								<th class="pull-center">Task Type</th>
+								<th class="pull-center">Task Status</th>
+								<th class="pull-center">Task Priority</th>
+							</tr>
+							<tr ng-repeat="task in tasklist">
+								<td>{{task.name}}</td>
+								<td>{{task.taskfor}}</td>
+								<td>{{task.taskassigneddate}}</td>
+								<td>{{task.type}}</td>
+								<td>{{task.status}}</td>
+								<td>{{task.priority}}</td>
+								<td><a id="updatetask"  data-toggle="modal"  data-target="#updateTaskmodal"   ng-click="editExistingTask(task)"><i class="fa fa-pencil-square" aria-hidden="true"></i></a></td>
+							</tr>
+						</table>
+						</div>
+						</div>
+						
+						<div id="encasedRequest" class="tab-pane fade">
+						    <br></br>
+						<div class="table-responsive">
+						  <table class="table table-bordered table-fixed table-hover">
+							<tr class ="success">
+								<th class="pull-center">User Name</th>
+								<th class="pull-center">Enashed Amount</th>
+								<th class="pull-center">Request Date</th>
+								<th class="pull-center">Status</th>
+							</tr>
+							<tr ng-repeat="requestencash in enashedlist">
+								<td>{{requestencash.username}}</td>
+								<td>{{requestencash.encashedamount}}</td>
+								<td>{{requestencash.requestdate}}</td>
+								<td>{{requestencash.status}}</td>
+								<td><a id="updatetask"  data-toggle="modal"  data-target="#updateEncasedmodal"   ng-click="editExistingEnasedRequest(requestencash)"><i class="fa fa-pencil-square" aria-hidden="true"></i></a></td>
+							</tr>
+						</table>
+						</div>
+						
+						</div>
+						</div>
+            </div>
+          </div>
+</div>
+ </div>
+ <div class="col-md-6">
+ <div id="networkmember-chart">
+ <input type="text" id="networkmembernodeid"  ng-hide="true">
+ </div>
+ </div> 
+ </div>
+ </div>
+ 
+ </snap-content>
+<!-- Modal Profile Create -->
+ <div id="profiledetails"  name="profiledetails" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog">
+ <div class="modal-dialog modal-lg">
+	<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title">New Member Details</h4>	
+						</div>
+	<div class="modal-body">
+        <div class="bhoechie-tab-container">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
+              <div class="list-group">
+                <a href="#" class="list-group-item active text-center">
+                  <h4><i class="fa fa-user" aria-hidden="true"></i></h4><br/>Profile
+                </a>
+                <a href="#" class="list-group-item text-center">
+                  <h4><i class="fa fa-sitemap" aria-hidden="true"></i></h4><br/>Network
+                </a>
+                <a href="#" class="list-group-item text-center">
+                  <h4><i class="fa fa-phone" aria-hidden="true"></i></h4><br/>Contact
+                </a>
+				<a href="#" class="list-group-item text-center">
+                  <h4><i class="fa fa-share-square-o" aria-hidden="true"></i></h4><br/>Social
+                </a>
+              </div>
+            </div>
+      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab">
+                <!-- flight section -->
+                <div class="bhoechie-tab-content active">
+                    <center>
+                      <div class="row">
+
+    <!-- edit form column -->
+    <div class="col-md-12 personal-info">
+      <h3>Personal info</h3>
+      <form class="form-horizontal" role="form">
+        <div class="form-group">
+          <label class="col-lg-3 control-label">First name </label>
+          <div class="col-lg-8">
+            <input class="form-control" ng-model="userprofile.firstname" placeholder="First name" type="text">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Last name </label>
+          <div class="col-lg-8">
+            <input class="form-control" ng-model="userprofile.lastname" placeholder="Last name" type="text">
+          </div>
+        </div>
+       <div class="form-group">
+          <label class="col-lg-3 control-label">DOB</label>
+          <div class="col-lg-8">
+            <input class="form-control" ng-model="userprofile.dateofbirth" placeholder="Date of Birth" type="date">
+          </div>
+        </div>
+        
+          <div class="form-group">
+          <label class="col-lg-3 control-label">Gender</label>
+          <div class="col-lg-8">
+           <label><input type="radio" id="male" name="male" ng-model="userprofile.gender" value="Male" ng-required="true"/> Male </label>	
+		   <label><input type="radio" id="female" name="female"  ng-model="userprofile.gender" value="Female" ng-required="true"/> Female </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-3 control-label">Username </label>
+          <div class="col-md-8">
+            <input class="form-control" ng-model="userprofile.logindetails.username" placeholder="Username" type="text" requird>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label">Password </label>
+          <div class="col-md-8">
+            <input class="form-control"  ng-model="userprofile.logindetails.prepassword" placeholder="Password" type="password" requird>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label">Confirm password</label>
+          <div class="col-md-8">
+            <input class="form-control" ng-model="userprofile.logindetails.password"  placeholder="Confirm password" type="password" requird>
+          </div>
+        </div>
+	<div class="col-md-6">
+	 <label class="control-label">profile Image</label>
+      <div class="text-center">
+        <input type="file" class="text-center center-block well well-sm avatar img-circle img-thumbnail" alt="avatar">
+      </div>
+    </div>
+	<div class="col-md-6">
+	 <label class="control-label">Identity Proof</label>
+      <div class="text-center">
+        <input type="file" class="text-center center-block well well-sm avatar img-circle img-thumbnail" alt="avatar">
+      </div>
+    </div>
+      </form>
+    </div>
+  </div>
+                    </center>
+                </div>
+                <!-- train section -->
+                <div class="bhoechie-tab-content">
+                    <center>
+                                         <div class="row">
+
+    <!-- edit form column -->
+    <div class="col-md-12 personal-info">
+      <h3>Network info</h3>
+      <form class="form-horizontal" role="form">
+		<div class="form-group">
+          <label class="col-lg-3 control-label">Parent Profile ID</label>
+          <div class="col-lg-8">
+            <input class="form-control"  ng-model="userprofile.networkinfo.parentmemberid" placeholder="Refrence ID" type="text">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Member Type </label>
+          <div class="col-lg-8">
+            <input class="form-control" ng-model="userprofile.networkinfo.memberlevel" placeholder="Member Type" type="text">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+                    </center>
+                </div>
+  
+                <div class="bhoechie-tab-content">
+                    <center>
+                   <div class="panel with-nav-tabs panel">
+					<div class="panel-heading">
+						<h3>Contact Info</h3>
+					</div>
+				<div class="panel-body">
+					<ul class="nav nav-tabs">
+							<li class="active"><a data-toggle="tab" id="addressdetails" class="pull-center"  href="/dashboard/overview#physicaladdress"><i class="fa fa-lock"></i>Physical Conatct</a></li>
+							<li><a data-toggle="tab" id="contactdetails" class="pull-center"  href="/dashboard/overview#phonedetails"><i class="fa fa-money"></i>Digital Contact</a></li>
+						</ul>
+				<div class="tab-content">
+					<div id="physicaladdress" class="tab-pane fade">
+					<br></br>
+					<div class="form-group">
+          <label class="col-lg-3 control-label">Address Details</label>
+          <div class="col-lg-8">
+            <textarea class="form-control"  ng-model="userprofile.conatctDetails.addressText" placeholder="Address Details"></textarea>
+          </div>
+	         </div>
+			 			<div class="form-group">
+          <label class="col-lg-3 control-label">Near By Landmark</label>
+          <div class="col-lg-8">
+            <textarea class="form-control" ng-model="userprofile.conatctDetails.landMark"  placeholder="Your Near By Landmark"></textarea>
+          </div>
+	         </div>
+			  <div class="form-group">
+          <label class="col-lg-3 control-label">Pincode</label>
+          <div class="col-lg-8">
+            <input class="form-control" ng-model="userprofile.conatctDetails.pincode" placeholder="Your pincode" type="text">
+          </div>
+	         </div>
+			 	 <div class="form-group">
+          <label class="col-lg-3 control-label">District</label>
+          <div class="col-lg-8">
+            <input class="form-control"  ng-model="userprofile.conatctDetails.district" placeholder="Your District" type="text" list="ditrictlist">
+			<datalist id="ditrictlist">
+			<option value="Balasore">
+         </datalist>
+          </div>
+	         </div>
+		 <div class="form-group">
+          <label class="col-lg-3 control-label">State</label>
+          <div class="col-lg-8">
+            <input class="form-control"  ng-model="userprofile.conatctDetails.state" placeholder="Your Statae" type="text" list="statelist">
+			<datalist id="statelist">
+			<option value="Odisha">
+         </datalist>
+          </div>
+	      </div>
+					</div>
+					<div id="phonedetails" class="tab-pane fade">
+					<br></br>
+					<div class="col-md-11">
+				<div class="form-group">
+					<label class="col-lg-4 control-label">Mobile Number</label>
+				<div class="col-lg-7">
+					 <input class="form-control" ng-model="userprofile.conatctDetails.mobilenumber" placeholder="Your Mobile Number" type="text" requird>
+				 </div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-4 control-label">Your Email</label>
+				<div class="col-lg-7">
+					 <input class="form-control" ng-model="userprofile.conatctDetails.email" placeholder="Your Email Id" type="text" requird>
+				 </div>
+				</div>
+				</div>
+					</div>
+                   </div>
+	   
+      </div>
+  </div>
+                    </center>
+                </div>
+        
+            </div>
+        </div>	
+		</div>	
+	
+				<div class="modal-footer">
+							<button type="submit" id="usersearch" class="btn btn-default" ng-click="addUserDetails()"
+								data-dismiss="modal"><i class="fa fa-check-circle" aria-hidden="true"></i>Confirm</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal"><i class="fa fa-times-circle" aria-hidden="true"></i>Close</button>
+			   </div>
+			</div>
+		</div>
+	</div>
+			
+ 
+ 
+
+	
+	
+	<!-- meeting modal-->
+	<div id="setupmeeting"  name="setupmeeting" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog">
+ <div class="modal-dialog">
+	<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title">Setup Mettings</h4>	
+						</div>
+	<div class="modal-body">
+	<div class="col-md-6">
+        <div class="form-group">
+				 <input type="text" class="form-control" placeholder="Meeting  For" list="grouplist">
+<datalist id="grouplist">
+  <option value="Level-1">
+  <option value="Level-2">
+  <option value="Level-3">
+  <option value="Level-4">
+  <option value="Level-5">
+  <option value="Level-6">
+  <option value="Level-7">
+  <option value="Level-8">
+  <option value="Level-9">
+  <option value="Level-10">
+  <option value="All">
+</datalist>
+				</div>
+				<div class="form-group">
+				 <input type="datetime-local" class="form-control" placeholder="Meeting  Start Date">
+				</div>
+				<div class="form-group">
+				 <input type="datetime-local" class="form-control" placeholder="Meeting  End Date">
+				</div>
+				<div class="form-group">
+				 <textarea  class="form-control" placeholder="Meeting  Agenda"></textarea>
+				</div>
+				</div>
+		</div>
+				<div class="modal-footer">
+							<button type="submit" id="usersearch" class="btn btn-default" ng-click="downloadAttendaceReport()"
+								data-dismiss="modal"><i class="fa fa-check-circle" aria-hidden="true"></i>Confirm</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal"><i class="fa fa-times-circle" aria-hidden="true"></i>Close</button>
+			   </div>
+			</div>
+		</div>
+	</div>
+	
+	
+		<!-- Task Details modal-->
+	<div id="setuptask"  name="setuptask" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog">
+ <div class="modal-dialog">
+	<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title">Task Setup </h4>	
+						</div>
+	<div class="modal-body">
+	<div class="col-md-6">
+        <div class="form-group">
+				 <input type="text" class="form-control" placeholder="Task  For" list="grouplist">
+<datalist id="grouplist">
+  <option value="Level-1">
+  <option value="Level-2">
+  <option value="Level-3">
+  <option value="Level-4">
+  <option value="Level-5">
+  <option value="Level-6">
+  <option value="Level-7">
+  <option value="Level-8">
+  <option value="Level-9">
+  <option value="Level-10">
+  <option value="All">
+</datalist>
+				</div>
+				<div class="form-group">
+				 <input type="datetime-local" class="form-control" placeholder="Task  Start Date">
+				</div>
+				<div class="form-group">
+				 <input type="datetime-local" class="form-control" placeholder="Task  End Date">
+				</div>
+				<div class="form-group">
+				 <textarea  class="form-control" placeholder="Task Desription"></textarea>
+				</div>
+				</div>
+		</div>
+				<div class="modal-footer">
+							<button type="submit" id="usersearch" class="btn btn-default" ng-click="downloadAttendaceReport()"
+								data-dismiss="modal"><i class="fa fa-check-circle" aria-hidden="true"></i>Confirm</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal"><i class="fa fa-times-circle" aria-hidden="true"></i>Close</button>
+			   </div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+<!-- OTP Popup Modal -->		
+<div  id="otpvalidation" name="otpvalidation" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog">
+	 	  <div class="modal-dialog">
+	
+		<div class="modal-content">
+		  <form id="otprequestform" method="post"  class="form-horizontal">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+			<h4 class="modal-title" id="otpmodal">OTP Validation</h4>
+		  </div>
+		  
+		  <div class="modal-body">
+			<div class="col-md-8" >
+					<div class="form-group">
+						<label for="mobilenumber">Mobile Number</label>
+						<input type="text" id="otpmobilenumber" ng-model="otp.mobilenumber" name="mobilenumber" class="form-control" readonly>
+					</div>
+					<div class="form-group">
+						<label for="otpnumber">OTP Code</label>
+						<input type="password" id="otpnumber" ng-model="otp.otpnumber" name="otpnumber" class="form-control" placeholder="your OTP" required="required">
+					</div>
+										
+				</div>
+			</div>
+					<div class="modal-footer">
+							<div class="col-md-12">
+							   <input  type="button" id="otpvalidation" name="otpvalidation" value="Validate" class="btn btn-primary btn-block" />
+							   <input  type="button" id="otpresend" name="otpresend" value="Re-Send" class="btn btn-primary btn-block" />
+							</div>
+					</div>
+					</form>
+		  </div>
+		  
+		</div>
+	</div>
+	
+	<!-- Task Update Details-->
+	<div id="updateTaskmodal"  name="updateTaskmodal" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog">
+ <div class="modal-dialog">
+	<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title">Task Details </h4>	
+						</div>
+	<div class="modal-body">
+	<div class="col-md-6">
+        <div class="form-group">
+				 <input type="text" class="form-control" placeholder="Task  Name" ng-model="task.name">
+	     </div>
+		  <div class="form-group">
+				 <input type="text" class="form-control" placeholder="Task  For" ng-model="task.taskfor">
+	     </div>
+				<div class="form-group">
+				 <input type="datetime-local" class="form-control" placeholder="Task Assigned Date" ng-model="task.taskassigneddate">
+				</div>
+			 <div class="form-group">
+				 <input type="text" class="form-control" placeholder="Task  Type" ng-model="task.type">
+	     </div>
+		  <div class="form-group">
+				 <input type="text" class="form-control" placeholder="Task  Status" ng-model="task.status" list="taskstatuslist">
+				 <datalist id="taskstatuslist">
+  <option value="Pending">
+  <option value="Approved">
+  <option value="Delay">
+</datalist>
+	     </div>
+		  <div class="form-group">
+				 <input type="text" class="form-control" placeholder="Task  Priority" ng-model="task.priority">
+	     </div>
+				<div class="form-group">
+				 <textarea  class="form-control" placeholder="Comment"></textarea>
+				</div>
+				</div>
+		</div>
+				<div class="modal-footer">
+							<button type="submit" id="usersearch" class="btn btn-default" ng-click="downloadAttendaceReport()"
+								data-dismiss="modal"><i class="fa fa-check-circle" aria-hidden="true"></i>Confirm</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal"><i class="fa fa-times-circle" aria-hidden="true"></i>Close</button>
+			   </div>
+			</div>
+		</div>
+	</div>
+	
+	<script>
+$(document).ready(function() {
+    $("div.bhoechie-tab-menu>div.list-group>a").click(function(e) {
+        e.preventDefault();
+        $(this).siblings('a.active').removeClass("active");
+        $(this).addClass("active");
+        var index = $(this).index();
+        $("div.bhoechie-tab>div.bhoechie-tab-content").removeClass("active");
+        $("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
+    });
+});
+
+$(document).on('click', '.panel-heading span.clickable', function(e){
+    var $this = $(this);
+	if(!$this.hasClass('panel-collapsed')) {
+		$this.parents('.panel').find('.panel-body').slideUp();
+		$this.addClass('panel-collapsed');
+		$this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+	} else {
+		$this.parents('.panel').find('.panel-body').slideDown();
+		$this.removeClass('panel-collapsed');
+		$this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+	}
+})
+</script>
+		</div><!---End of Modal Export details--> 
+ </article>
+ </div>
